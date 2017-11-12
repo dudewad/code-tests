@@ -8,7 +8,7 @@ define([], function() {
         gl.compileShader(shader);
 
         if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-            throw new Error(`Couldn't compile shader of type ${type}!`, gl.getShaderInfoLog(shader));
+            throw new Error('Couldn\'t compile shader of type ' + type + '!', gl.getShaderInfoLog(shader));
         }
 
         return shader;
@@ -39,8 +39,8 @@ define([], function() {
     }
 
     return {
-        createShader,
-        getShaders,
-        resize
+        createShader: createShader,
+        getShaders: getShaders,
+        resize: resize
     }
 });

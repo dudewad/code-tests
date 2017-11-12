@@ -1,5 +1,5 @@
 define(['lib/gl-matrix', 'utils/webgl-utils'], function(glMatrix, glUtils) {
-    let mat4 = glMatrix.mat4;
+    var mat4 = glMatrix.mat4;
 
     function App() {
         this.canvas = document.querySelector('#canvas');
@@ -22,7 +22,7 @@ define(['lib/gl-matrix', 'utils/webgl-utils'], function(glMatrix, glUtils) {
         gl.linkProgram(this.glProgram);
 
         if (!gl.getProgramParameter(this.glProgram, gl.LINK_STATUS)) {
-            throw new Error(`Couldn't link program!`, gl.getProgramInfoLog(this.glProgram))
+            throw new Error('Couldn\'t link program!', gl.getProgramInfoLog(this.glProgram))
         }
 
         gl.useProgram(this.glProgram);
