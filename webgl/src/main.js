@@ -16,7 +16,7 @@ requirejs.config({
 
 // Start the main app logic.
 requirejs(['app/App'], function (App) {
-    let app = new App();
+    var app = new App();
 
 
     app.draw({

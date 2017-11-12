@@ -3,7 +3,7 @@ define(['lib/gl-matrix', 'utils/webgl-utils'], function(glMatrix, glUtils) {
 
     function App() {
         this.canvas = document.querySelector('#canvas');
-        let gl = this.gl = this.canvas.getContext('webgl');
+        var gl = this.gl = this.canvas.getContext('webgl');
         if (gl) {
             console.log('Canvas WebGL gl is running!');
         }
@@ -45,11 +45,11 @@ define(['lib/gl-matrix', 'utils/webgl-utils'], function(glMatrix, glUtils) {
         draw: function (settings) {
             glUtils.resize(this.gl, this.canvas);
 
-            let gl = this.gl;
-            let attrs = this.programInfo.attrLocs;
-            let unis = this.programInfo.uniformLocs;
-            let buffer = gl.createBuffer();
-            let data = new Float32Array([
+            var gl = this.gl;
+            var attrs = this.programInfo.attrLocs;
+            var unis = this.programInfo.uniformLocs;
+            var buffer = gl.createBuffer();
+            var data = new Float32Array([
                 //Triangle 1
                 settings.left, settings.bottom, settings.depth, settings.w,
                 settings.right, settings.bottom, settings.depth, settings.w,

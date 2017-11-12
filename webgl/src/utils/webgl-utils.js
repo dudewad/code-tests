@@ -1,8 +1,8 @@
 define([], function() {
-    let cachedShaders;
+    var cachedShaders;
 
     function createShader(gl, src, type) {
-        let shader = gl.createShader(type);
+        var shader = gl.createShader(type);
 
         gl.shaderSource(shader, src);
         gl.compileShader(shader);
@@ -27,8 +27,8 @@ define([], function() {
      * @param c     The Canvas object
      */
     function resize (gl, c) {
-        let cW = c.clientWidth;
-        let cH = c.clientHeight;
+        var cW = c.clientWidth;
+        var cH = c.clientHeight;
 
         if (c.width !== cW || c.height !== cH) {
             c.width = cW;
