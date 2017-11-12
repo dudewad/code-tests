@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WebGl Test</title>
+
+    <link type="text/css" rel="stylesheet" href="./style/default.css"/>
+</head>
+<body>
+<canvas id="canvas">
+</canvas>
+
+<script id="fragment-shader" type="x-shader/x-fragment">
+    precision mediump float;
+    uniform vec4 color;
+
+    void main() {
+      gl_FragColor = color;
+    }
+</script>
+<script id="vertex-shader" type="x-shader/x-vertex">
+    attribute vec4 position;
+
+    uniform mat4 uModelViewMatrix;
+    uniform mat4 uProjectionMatrix;
+
+    void main() {
+      gl_Position = uProjectionMatrix * uModelViewMatrix * position;
+    }
+</script>
+
+<script data-main="src/main" src="src/lib/require.js"></script>
+<script src="//localhost:35729/livereload.js"></script>
+</body>
+</html>

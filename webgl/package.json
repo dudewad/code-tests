@@ -1,0 +1,12 @@
+{
+  "name": "webgl",
+  "version": "1.0.0",
+  "description": "WebGL tests",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Layton Miller",
+  "license": "MIT",
+  "devDependencies": {}
+}
