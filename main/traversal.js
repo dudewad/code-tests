@@ -8,15 +8,15 @@ const argv = require('argv');
 argv.option([
     {name: 'find', type: 'string'}
 ]);
-let args = argv.run(argv);
+var args = argv.run(argv);
 
 if (args.options.find === undefined) {
     throw new Error('--find argument must be set.')
 }
 
-let searchVal = parseInt(args.options.find);
+var searchVal = parseInt(args.options.find);
 
-let a = {
+var a = {
     val: 0,
     b: {
         val: 1,
@@ -84,7 +84,7 @@ let a = {
 };
 
 function dfs(node, nodeKey, targetVal) {
-    let found;
+    var found;
 
     if(node.val === targetVal) {
         found = {};
@@ -92,7 +92,7 @@ function dfs(node, nodeKey, targetVal) {
         return found;
     }
 
-    for(let key in node) {
+    for(var key in node) {
         if(node.hasOwnProperty(key)) {
             if(key !== 'val') {
                 found = dfs(node[key], key, targetVal);
@@ -106,20 +106,20 @@ function dfs(node, nodeKey, targetVal) {
 }
 
 console.log('#######Running DFS algorithm');
-let node = dfs(a, 'a', searchVal);
-console.log(`Searching for node: ${searchVal}`);
-console.log(`Found: ${JSON.stringify(node)}`);
+var node = dfs(a, 'a', searchVal);
+console.log('Searching for node:', searchVal);
+console.log('Found:', JSON.stringify(node));
 
 
 function bfs(node, nodeKey, targetVal, queue) {
-    let found;
+    var found;
     if (node.val === targetVal) {
         found = {};
         found[nodeKey] = node;
         return found;
     }
 
-    for(let key in node) {
+    for(var key in node) {
         if(node.hasOwnProperty(key)) {
             if(key !== 'val') {
                 queue.push({n: node[key], k: key});
@@ -127,11 +127,11 @@ function bfs(node, nodeKey, targetVal, queue) {
         }
     }
 
-    let next = queue.shift();
+    var next = queue.shift();
     return next ? bfs(next.n, next.k, targetVal, queue) : undefined;
 }
 
 console.log('#######Running BFS algorithm');
 node = bfs(a, 'a', searchVal, []);
-console.log(`Searching for node: ${searchVal}`);
-console.log(`Found: ${JSON.stringify(node)}`);
+console.log('Searching for node:', searchVal);
+console.log('Found:', JSON.stringify(node));
