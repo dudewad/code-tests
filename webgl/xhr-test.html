@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div class="progressbg" id='progress' style="background: #CCC; height: 100px; position: fixed; top: 50%; width: 50%; left: 50%; transform: translateX(-50%) translateY(-50%);">
+    <div style="background: #09F; height: 100%; width: 0; position:absolute; left: 0; top: 0;" class="progress" id="progBar"></div>
+</div>
+
+<script type="text/javascript">
+    var xhr = new XMLHttpRequest();
+    var progress = document.querySelector('#progress');
+    var progBar = document.querySelector('#progBar');
+    xhr.open('GET', 'http://localhost:8081/asset/wood.jpg?t=' + Date.now());
+    xhr.onprogress = function(evt) {
+        progBar.style.width = (evt.loaded / evt.total * 100) + "%";
+    };
+    xhr.responseType = 'blob';
+    xhr.onreadystatechange = function (data) {
+        if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+            var url = window.URL.createObjectURL(xhr.response);
+            progress.style.display = 'none';
+            var img = document.createElement('img');
+            img.src = url;
+            var body = document.querySelector('body');
+            body.appendChild(img);
+        }
+    };
+    xhr.send();
+</script>
+
+</body>
+
+</html>
