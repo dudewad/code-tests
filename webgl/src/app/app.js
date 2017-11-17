@@ -1,9 +1,9 @@
-define(['lib/gl-matrix', 'utils/webgl-utils'], function(glMatrix, glUtils) {
+define(['lib/gl-matrix', 'utils/webgl-utils'], function (glMatrix, glUtils) {
     var mat4 = glMatrix.mat4;
 
     function App() {
         this.canvas = document.querySelector('#canvas');
-        var gl = this.gl =  glUtils.getGLContext(this.canvas);
+        var gl = this.gl = glUtils.getGLContext(this.canvas);
         gl.getExtension('EXT_texture_filter_anisotropic');
         gl.clearColor(0, 0, 0, 1);
         gl.clear(gl.COLOR_BUFFER_BIT);
@@ -38,7 +38,8 @@ define(['lib/gl-matrix', 'utils/webgl-utils'], function(glMatrix, glUtils) {
 
         var texture = gl.createTexture();
         gl.bindTexture(gl.TEXTURE_2D, texture);
-        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1,1,0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([0,0,255,255]));
+        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([0, 0, 255, 255]));
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR);
 
         var image = new Image();
         var that = this;
@@ -56,7 +57,7 @@ define(['lib/gl-matrix', 'utils/webgl-utils'], function(glMatrix, glUtils) {
 
     App.prototype = {
         draw: function (settings) {
-            if(!settings) {
+            if (!settings) {
                 settings = this.lastSettings;
             }
             this.lastSettings = settings;
@@ -133,7 +134,7 @@ define(['lib/gl-matrix', 'utils/webgl-utils'], function(glMatrix, glUtils) {
             const zFar = 100.0;
             const projectionMatrix = mat4.create();
             const modelViewMatrix = mat4.create();
-            
+
             gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
             //Assigns perspective o the projectionMatrix
             mat4.perspective(
@@ -149,11 +150,11 @@ define(['lib/gl-matrix', 'utils/webgl-utils'], function(glMatrix, glUtils) {
             mat4.rotate(modelViewMatrix,
                 modelViewMatrix,
                 settings.rotateX,
-                [1,0,0]);
+                [1, 0, 0]);
             mat4.rotate(modelViewMatrix,
                 modelViewMatrix,
                 settings.rotateY,
-                [0,1,0]);
+                [0, 1, 0]);
 
             gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
             gl.bufferData(gl.ARRAY_BUFFER, data, gl.STATIC_DRAW);
@@ -161,17 +162,13 @@ define(['lib/gl-matrix', 'utils/webgl-utils'], function(glMatrix, glUtils) {
             gl.enableVertexAttribArray(attrs.position);
             gl.vertexAttribPointer(attrs.position, 4, gl.FLOAT, false, 0, 0);
 
-            gl.enableVertexAttribArray(attrs.color);
-            gl.bindBuffer(gl.ARRAY_BUFFER, this.buffers.color);
-            gl.vertexAttribPointer(attrs.color, 3, gl.UNSIGNED_BYTE, true, 0, 0);
-
             gl.uniformMatrix4fv(unis.projectionMatrix, false, projectionMatrix);
             gl.uniformMatrix4fv(unis.modelViewMatrix, false, modelViewMatrix);
 
             gl.drawArrays(gl.TRIANGLES, 0, 36);
         },
 
-        setColorBuffer: function(colors) {
+        setColorBuffer: function (colors) {
             var gl = this.gl;
             var buffer = gl.createBuffer();
             gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
@@ -179,57 +176,68 @@ define(['lib/gl-matrix', 'utils/webgl-utils'], function(glMatrix, glUtils) {
             this.buffers.color = buffer;
         },
 
-        setTexCoords: function() {
+        setTexCoords: function () {
             var gl = this.gl;
             var coords = [
                 //Front face
-                0, 0,
-                0, 1,
-                1, 0,
-                0, 1,
-                1, 1,
-                1, 0,
+                0, 0, //left top
+                0, .1, //left bottom
+                1, 0, //right top
+
+                0, .1, //left bottom
+                1, .1, //right bottom
+                1, 0, //right top
+
                 //Left face
-                1, 0,
-                0, 0,
-                1, 1,
-                0, 0,
-                0, 1,
-                1, 1,
+                0, 0, //top back
+                .05, 0, //bottom back
+                0, -1, //top front
+
+                .05, 0, //bottom back
+                .05, -1, //bottom front
+                0, -1, //top front
+
                 //Right face
-                0, 0,
-                0, 1,
-                1, 0,
-                0, 1,
-                1, 1,
-                1, 0,
+                1, 0, //top back
+                1, 1, //top front
+                .95, 0, //bottom back
+
+                1, 1, //top front
+                .95, 1, //bottom front
+                .95, 0, //bottom back
+
                 //Top face
-                0, 0,
-                1, 0,
-                0, 1,
-                1, 0,
-                1, 1,
-                0, 1,
+                0, 0, //left front
+                1, 0, //right front
+                0, 1, //left back
+
+                1, 0, //right front
+                1, 1, //right back
+                0, 1, //left back
+
                 //Bottom face
-                0, 0,
-                1, 0,
-                0, 1,
-                1, 0,
-                1, 1,
-                0, 1,
+                0, 0, //left front
+                1, 0, //right front
+                0, 1, //left back
+
+                1, 0, //right front
+                1, 1, //right back
+                0, 1, //left back
+
                 //Back face
-                0, 0,
-                0, 1,
-                1, 0,
-                0, 1,
-                1, 1,
-                1, 0
+                0, 0, //right top
+                0, .1, //right bottom
+                1, 0, //left top
+
+                0, .1, //right bottom
+                1, .1, //left bottom
+                1, 0 //left top
             ];
 
             gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(coords), gl.STATIC_DRAW);
         },
 
-        getContext: function() {
+        getContext: function () {
             return this.gl;
         }
     };
