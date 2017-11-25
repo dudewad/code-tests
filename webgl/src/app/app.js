@@ -1,5 +1,6 @@
-define(['lib/gl-matrix', 'utils/webgl-utils'], function (glMatrix, glUtils) {
+define(['lib/gl-matrix', 'utils/webgl-utils', 'app/scenes/DesktopConfigurator_scn'], function (glMatrix, glUtils, Scene) {
     var mat4 = glMatrix.mat4;
+    var scene = new Scene();
 
     function App() {
         this.canvas = document.querySelector('#canvas');
