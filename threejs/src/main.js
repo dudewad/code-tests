@@ -4,12 +4,14 @@ requirejs.config({
     paths: {
         app: 'app',
         lib: 'lib',
-        utils: 'utils'
+        utils: 'utils',
+        components: 'app/components',
+        threejs: 'lib/three.min'
     },
     //Caching is a problem... this fixes that
     urlArgs: "bust=" + (new Date()).getTime()
 });
 
-requirejs(['app/App', 'app/services/globalEventService'], function (App, GlobalEvtSvc) {
-
+requirejs(['app/App'], function (App) {
+    new App();
 });
