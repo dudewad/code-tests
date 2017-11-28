@@ -4,8 +4,9 @@ requirejs.config({
     paths: {
         app: 'app',
         lib: 'lib',
-        utils: 'utils',
+        utils: 'app/utils',
         components: 'app/components',
+        services: 'app/services',
         threejs: 'lib/three.min'
     },
     //Caching is a problem... this fixes that
