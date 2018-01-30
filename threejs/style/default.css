@@ -17,7 +17,7 @@ canvas {
 
 .ui {
     position:fixed;
-    width: 100%;
+    width: 0;
     height: 100%;
 }
 
@@ -28,6 +28,7 @@ canvas {
     margin: 0;
     padding: 0;
     list-style: none;
+    width: 200px;
 }
 
 #load-list{
@@ -66,4 +67,28 @@ a {
 .load-item,
 a {
     color: #FFF;
+}
+
+#info {
+    position: fixed;
+    top: 2em;
+    right: 2em;
+    color: #FFF;
+    width: 200px;
+}
+
+#inputs {
+    position: absolute;
+    top: 2em;
+    left: 9em;
+}
+
+#inputs input {
+    border: none;
+    padding: .5em;
+    background: #222;
+    color: #ccc;
+    margin-bottom: .5em;
+    border-radius: 4px;
+    outline: none;
 }

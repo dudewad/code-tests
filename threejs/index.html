@@ -16,6 +16,20 @@
             <li data-target="/asset/oak.jpg"><a>Oak</a></li>
             <li data-target="/asset/white-ash.jpg"><a>White Ash</a></li>
         </ul>
+        <form id="inputs">
+            <input id="width-input"
+                   type="number"
+                   placeholder="Enter a Width"
+                   data-param="width"/>
+            <input id="height-input"
+                   type="number"
+                   placeholder="Enter a Height"
+                   data-param="height"/>
+            <input id="depth-input"
+                   type="number"
+                   placeholder="Enter a Depth"
+                   data-param="depth"/>
+        </form>
         <div id="load-list"></div>
     </div>
 </section>
@@ -66,6 +80,11 @@
         gl_FragColor = mix(t0, t1, delta) * addedLights;
     }
 </script>
+
+<div id="info">
+    <!--targetPol:<br><span id="targetPol"></span><br>
+    currPol:<br><span id="currPol"></span>-->
+</div>
 
 <script data-main="src/main" src="src/lib/require.js"></script>
 </body>

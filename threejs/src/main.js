@@ -6,8 +6,9 @@ requirejs.config({
         lib: 'lib',
         utils: 'app/utils',
         components: 'app/components',
+        objects: 'app/objects',
         services: 'app/services',
-        threejs: 'lib/three.min'
+        threejs: 'lib/three'
     },
     //Caching is a problem... this fixes that
     urlArgs: "bust=" + (new Date()).getTime()
